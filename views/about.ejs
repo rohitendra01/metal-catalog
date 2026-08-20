@@ -1,0 +1,202 @@
+<!-- About Hero -->
+<section class="hero-mesh relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+        <div class="text-center max-w-3xl mx-auto fade-in-up">
+            <h1 class="font-display font-extrabold text-4xl md:text-5xl text-surface-700 dark:text-white mb-6">About
+                <span class="gradient-text">KitchenCraft</span>
+            </h1>
+            <p class="text-surface-500 dark:text-surface-400 text-lg leading-relaxed">Your trusted partner for premium
+                kitchen utensils and cookware. We combine expert curation with a passion for quality cooking.</p>
+        </div>
+    </div>
+    <div class="absolute top-20 left-10 w-72 h-72 bg-brand-500/5 rounded-full blur-3xl"></div>
+</section>
+
+<!-- Capabilities -->
+<section class="py-16 md:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="font-display font-bold text-3xl text-surface-700 dark:text-[#e2eaf8] mb-10 text-center">Our Product
+            Categories</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <% const capabilities=[ { icon: '🍳' , title: 'Cookware' ,
+                desc: 'Non-stick pans, stainless steel pots, pressure cookers, and woks — everything you need for daily cooking and gourmet meals.'
+                }, { icon: '🔪' , title: 'Knives & Cutting' ,
+                desc: "Chef's knives, bread knives, paring knives, and cutting boards crafted for precision, comfort, and long-lasting sharpness."
+                }, { icon: '🧁' , title: 'Bakeware' ,
+                desc: 'Baking trays, cake moulds, silicone mats, and loaf pans — perfect for home bakers and pastry enthusiasts.' }, {
+                icon: '🥄' , title: 'Kitchen Tools' ,
+                desc: 'Spatulas, ladles, whisks, peelers, graters, and tongs — the essential toolkit for every well-equipped kitchen.'
+                }, { icon: '📦' , title: 'Storage & Organization' ,
+                desc: 'Airtight containers, spice racks, pantry organizers, and fridge storage solutions to keep your kitchen tidy.'
+                }, { icon: '⚙️' , title: 'Specialty Appliances' ,
+                desc: 'Mandolines, spiralizers, food mills, and other specialty tools for creative and professional-level cooking.'
+                }, ]; %>
+                <% capabilities.forEach(cap=> { %>
+                    <div
+                        class="p-6 rounded-2xl bg-white dark:bg-[#162033] border border-surface-200 dark:border-[#1e3a5f] hover:border-brand-400 transition-colors group shadow-sm">
+                        <span class="text-4xl block mb-4">
+                            <%= cap.icon %>
+                        </span>
+                        <h3
+                            class="font-display font-semibold text-surface-700 dark:text-[#e2eaf8] text-xl mb-2 group-hover:text-brand-600 transition-colors">
+                            <%= cap.title %>
+                        </h3>
+                        <p class="text-surface-500 dark:text-[#94a3b8] text-sm leading-relaxed">
+                            <%= cap.desc %>
+                        </p>
+                    </div>
+                    <% }) %>
+        </div>
+    </div>
+</section>
+
+<!-- Stats -->
+<section class="border-y border-surface-200 dark:border-[#1e3a5f] bg-surface-100 dark:bg-[#0f172a]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+                <div class="font-display font-bold text-3xl md:text-4xl text-brand-600 mb-1">500+</div>
+                <div class="text-surface-500 dark:text-[#94a3b8] text-sm">Products in Catalog</div>
+            </div>
+            <div>
+                <div class="font-display font-bold text-3xl md:text-4xl text-brand-600 mb-1">10,000+</div>
+                <div class="text-surface-500 dark:text-[#94a3b8] text-sm">Happy Customers</div>
+            </div>
+            <div>
+                <div class="font-display font-bold text-3xl md:text-4xl text-brand-600 mb-1">50+</div>
+                <div class="text-surface-500 dark:text-[#94a3b8] text-sm">Top Brands Carried</div>
+            </div>
+            <div>
+                <div class="font-display font-bold text-3xl md:text-4xl text-brand-600 mb-1">100%</div>
+                <div class="text-surface-500 dark:text-[#94a3b8] text-sm">Quality Guaranteed</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-16 md:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Contact Info -->
+            <div>
+                <h2 class="font-display font-bold text-3xl text-surface-700 dark:text-[#e2eaf8] mb-6">Get In Touch</h2>
+                <p class="text-surface-500 dark:text-[#94a3b8] leading-relaxed mb-8">Ready to place an order or need help choosing the right kitchen product? Reach out to us for product queries, bulk pricing, or any questions.</p>
+
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-brand-100 dark:bg-brand-900/30 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-surface-700 dark:text-[#e2eaf8] mb-1">Store Address</h4>
+                            <p class="text-surface-500 dark:text-[#94a3b8] text-sm">Star City, 261/C, Near Nakshtra
+                                Nagar Office, Nakshtra
+                                Nagar,<br />Katangi Rd, Karmeta, Jabalpur, Madhya Pradesh 482002</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-brand-100 dark:bg-brand-900/30 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-surface-700 dark:text-[#e2eaf8] mb-1">Phone</h4>
+                             <p class="text-surface-500 dark:text-[#94a3b8] text-sm"><a href="https://api.whatsapp.com/send?phone=<%= String(whatsappNumber).replace(/[^0-9]/g, '') %>&text=<%= encodeURIComponent('Hello! I am inquiring from KitchenCraft website.') %>"
+                                    target="_blank" rel="noopener noreferrer"
+                                    class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">+91
+                                    834-901-7574</a><br />Mon–Sat,
+                                9am–6pm IST</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-brand-100 dark:bg-brand-900/30 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-surface-700 dark:text-[#e2eaf8] mb-1">Email</h4>
+                            <p class="text-surface-500 dark:text-[#94a3b8] text-sm"><a
+                                    href="mailto:inhouseprintingjbp@gmail.com"
+                                    class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">inhouseprintingjbp@gmail.com</a><br />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form — submits via mailto so it opens the device email client pre-filled -->
+            <div class="glass rounded-2xl p-8">
+                <h3 class="font-display font-semibold text-xl text-surface-700 dark:text-[#e2eaf8] mb-6">Send Us a
+                    Message</h3>
+                <form id="contactForm" class="space-y-4" onsubmit="sendMail(event)">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label
+                                class="block text-sm font-medium text-surface-500 dark:text-[#94a3b8] mb-1.5">Name</label>
+                            <input type="text" id="cfName" required
+                                class="w-full px-4 py-2.5 rounded-xl bg-surface-100 dark:bg-[#1e293b] border border-surface-200 dark:border-[#2d4a6b] text-surface-700 dark:text-[#cbd5e9] placeholder-surface-400 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-sm"
+                                placeholder="Your name" />
+                        </div>
+                        <div>
+                            <label
+                                class="block text-sm font-medium text-surface-500 dark:text-[#94a3b8] mb-1.5">Phone</label>
+                            <input type="tel" id="cfPhone"
+                                class="w-full px-4 py-2.5 rounded-xl bg-surface-100 dark:bg-[#1e293b] border border-surface-200 dark:border-[#2d4a6b] text-surface-700 dark:text-[#cbd5e9] placeholder-surface-400 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-sm"
+                                placeholder="+91 999-999-9999" />
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-surface-500 dark:text-[#94a3b8] mb-1.5">Your
+                            Email</label>
+                        <input type="email" id="cfEmail" required
+                            class="w-full px-4 py-2.5 rounded-xl bg-surface-100 dark:bg-[#1e293b] border border-surface-200 dark:border-[#2d4a6b] text-surface-700 dark:text-[#cbd5e9] placeholder-surface-400 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-sm"
+                            placeholder="you@example.com" />
+                    </div>
+                    <div>
+                        <label
+                            class="block text-sm font-medium text-surface-500 dark:text-[#94a3b8] mb-1.5">Message</label>
+                        <textarea rows="4" id="cfMessage" required
+                            class="w-full px-4 py-2.5 rounded-xl bg-surface-100 dark:bg-[#1e293b] border border-surface-200 dark:border-[#2d4a6b] text-surface-700 dark:text-[#cbd5e9] placeholder-surface-400 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-sm resize-none"
+                            placeholder="Tell us what you are looking for..."></textarea>
+                    </div>
+                    <button type="submit"
+                        class="w-full py-3 rounded-xl bg-gradient-to-r from-brand-700 to-brand-500 text-white font-semibold hover:from-brand-600 hover:to-brand-400 transition-all shadow-lg shadow-brand-500/25">
+                        Send Message
+                    </button>
+                </form>
+                <script>
+                    function sendMail(e) {
+                        e.preventDefault();
+                        var name = document.getElementById('cfName').value.trim();
+                        var phone = document.getElementById('cfPhone').value.trim();
+                        var email = document.getElementById('cfEmail').value.trim();
+                        var msg = document.getElementById('cfMessage').value.trim();
+                        var subject = encodeURIComponent('Inquiry from ' + name);
+                        var body = encodeURIComponent(
+                            'Name: ' + name + '\n' +
+                            'Phone: ' + (phone || 'N/A') + '\n' +
+                            'Email: ' + email + '\n\n' +
+                            'Message:\n' + msg
+                        );
+                        window.location.href = 'mailto:inhouseprintingjbp@gmail.com?subject=' + subject + '&body=' + body;
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+</section>

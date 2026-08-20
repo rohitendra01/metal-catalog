@@ -1,0 +1,412 @@
+/* ============= KitchenCraft Custom Styles ============= */
+
+/* Nav links */
+.nav-link {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #475569;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #1e293b;
+  background-color: rgba(37, 99, 235, 0.08);
+}
+
+.nav-active {
+  color: #1d4ed8 !important;
+  background-color: rgba(37, 99, 235, 0.12) !important;
+}
+
+/* Card hover animation */
+.product-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
+}
+
+/* Image zoom on hover */
+.img-zoom {
+  transition: transform 0.5s ease;
+}
+
+.img-zoom:hover {
+  transform: scale(1.08);
+}
+
+/* Gradient text — steel blue to sky */
+.gradient-text {
+  background: linear-gradient(135deg, #2563eb, #3b82f6, #60a5fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Shimmer skeleton */
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #e2e8f0 25%, #cbd5e1 50%, #e2e8f0 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Category pills */
+.category-pill {
+  transition: all 0.2s ease;
+}
+
+.category-pill:hover {
+  background-color: rgba(37, 99, 235, 0.1);
+  color: #1d4ed8;
+  border-color: rgba(37, 99, 235, 0.3);
+}
+
+.category-pill.active {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff;
+  border-color: transparent;
+}
+
+/* Fade in animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+/* Stagger children */
+.stagger-children>* {
+  opacity: 0;
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.stagger-children>*:nth-child(1) {
+  animation-delay: 0.05s;
+}
+
+.stagger-children>*:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.stagger-children>*:nth-child(3) {
+  animation-delay: 0.15s;
+}
+
+.stagger-children>*:nth-child(4) {
+  animation-delay: 0.2s;
+}
+
+.stagger-children>*:nth-child(5) {
+  animation-delay: 0.25s;
+}
+
+.stagger-children>*:nth-child(6) {
+  animation-delay: 0.3s;
+}
+
+.stagger-children>*:nth-child(7) {
+  animation-delay: 0.35s;
+}
+
+.stagger-children>*:nth-child(8) {
+  animation-delay: 0.4s;
+}
+
+.stagger-children>*:nth-child(9) {
+  animation-delay: 0.45s;
+}
+
+.stagger-children>*:nth-child(10) {
+  animation-delay: 0.5s;
+}
+
+.stagger-children>*:nth-child(11) {
+  animation-delay: 0.55s;
+}
+
+.stagger-children>*:nth-child(12) {
+  animation-delay: 0.6s;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f4ff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #93c5fd;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2563eb;
+}
+
+/* Hero gradient mesh — cool blue/steel radials on pale blue-white */
+.hero-mesh {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(37, 99, 235, 0.10) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 85%, rgba(148, 163, 184, 0.08) 0%, transparent 50%),
+    #f0f6ff;
+}
+
+/* Glass effect — cool blue-white translucent */
+.glass {
+  background: rgba(240, 246, 255, 0.80);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(37, 99, 235, 0.15);
+}
+
+/* Pulse glow — steel blue */
+@keyframes pulseGlow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(37, 99, 235, 0.25);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(37, 99, 235, 0.50);
+  }
+}
+
+.pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* Theme toggle icon */
+.theme-toggle {
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+
+/* ============================================================
+   DARK MODE OVERRIDES
+   Uses html.dark selector (higher specificity than Tailwind
+   utility classes) to flip the entire public site palette.
+   Dark theme: cool steel / slate — deep navy base.
+   ============================================================ */
+
+html.dark {
+  color-scheme: dark;
+}
+
+/* --- Background colours --- */
+html.dark body,
+html.dark .bg-surface-950 {
+  background-color: #080e1a !important;
+}
+
+html.dark .bg-surface-900 {
+  background-color: #0f172a !important;
+}
+
+html.dark .bg-surface-100,
+html.dark .bg-surface-800 {
+  background-color: #1e293b !important;
+}
+
+html.dark .bg-white {
+  background-color: #162033 !important;
+}
+
+html.dark .bg-brand-50 {
+  background-color: rgba(37, 99, 235, 0.08) !important;
+}
+
+html.dark .bg-brand-100 {
+  background-color: rgba(37, 99, 235, 0.15) !important;
+}
+
+/* Hover states */
+html.dark .hover\:bg-surface-100:hover,
+html.dark .hover\:bg-white:hover {
+  background-color: #263348 !important;
+}
+
+html.dark .hover\:bg-brand-50:hover {
+  background-color: rgba(37, 99, 235, 0.12) !important;
+}
+
+/* --- Border colours --- */
+html.dark .border-surface-200,
+html.dark .border-surface-300 {
+  border-color: #1e3a5f !important;
+}
+
+html.dark .border-brand-200 {
+  border-color: rgba(37, 99, 235, 0.35) !important;
+}
+
+/* --- Text colours --- */
+html.dark .text-surface-700 {
+  color: #e2eaf8 !important;
+}
+
+html.dark .text-surface-600 {
+  color: #cbd5e9 !important;
+}
+
+html.dark .text-surface-500 {
+  color: #94a3b8 !important;
+}
+
+html.dark .text-surface-400 {
+  color: #64748b !important;
+}
+
+html.dark .text-surface-300 {
+  color: #334155 !important;
+}
+
+html.dark .text-brand-600 {
+  color: #60a5fa !important;
+}
+
+/* --- Section wrapper backgrounds --- */
+html.dark section.border-y {
+  border-color: #1e3a5f !important;
+}
+
+/* --- Input elements --- */
+html.dark input,
+html.dark textarea,
+html.dark select {
+  background-color: #1e293b !important;
+  border-color: #2d4a6b !important;
+  color: #cbd5e9 !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #64748b !important;
+}
+
+/* --- Custom component classes --- */
+
+/* Nav link */
+html.dark .nav-link {
+  color: #94a3b8;
+}
+
+html.dark .nav-link:hover {
+  color: #e2eaf8;
+  background-color: rgba(37, 99, 235, 0.10);
+}
+
+html.dark .nav-active {
+  color: #60a5fa !important;
+  background-color: rgba(37, 99, 235, 0.14) !important;
+}
+
+/* Product card */
+html.dark .product-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Gradient text */
+html.dark .gradient-text {
+  background: linear-gradient(135deg, #60a5fa, #93c5fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Skeleton loader */
+html.dark .skeleton {
+  background: linear-gradient(90deg, #1e293b 25%, #263348 50%, #1e293b 75%);
+  background-size: 200px 100%;
+}
+
+/* Category pill */
+html.dark .category-pill:hover {
+  background-color: rgba(37, 99, 235, 0.12);
+  color: #60a5fa;
+  border-color: rgba(59, 130, 246, 0.35);
+}
+
+html.dark .category-pill.active {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff;
+}
+
+/* Hero mesh */
+html.dark .hero-mesh {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(37, 99, 235, 0.09) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 20%, rgba(59, 130, 246, 0.07) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 85%, rgba(148, 163, 184, 0.05) 0%, transparent 50%),
+    #080e1a;
+}
+
+/* Glass card */
+html.dark .glass {
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(37, 99, 235, 0.18);
+}
+
+/* Pulse glow */
+html.dark .pulse-glow {
+  animation: pulseGlowDark 3s ease-in-out infinite;
+}
+
+@keyframes pulseGlowDark {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(37, 99, 235, 0.30);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(37, 99, 235, 0.55);
+  }
+}
+
+/* Scrollbar */
+html.dark ::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: #1e3a5f;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #2563eb;
+}
+
+/* Shadow on cards */
+html.dark .shadow-sm {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;
+}

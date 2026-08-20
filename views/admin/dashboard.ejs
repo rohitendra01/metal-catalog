@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard | KitchenCraft</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd',
+                            400: '#60a5fa', 500: '#3b82f6', 600: '#2563eb',
+                            700: '#1d4ed8', 800: '#1e40af', 900: '#1e3a8a', 950: '#172554'
+                        },
+                        surface: {
+                            50: '#f8fafc', 100: '#f0f6ff', 200: '#e2e8f0', 300: '#cbd5e1',
+                            400: '#94a3b8', 500: '#64748b', 600: '#475569',
+                            700: '#334155', 800: '#1e293b', 900: '#0f172a', 950: '#080e1a'
+                        },
+                    },
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'], display: ['Nunito', 'Outfit', 'system-ui', 'sans-serif'] },
+                },
+            },
+        };
+    </script>
+    <!-- Sync theme from main site before first paint -->
+    <script>
+        (function () {
+            var s = localStorage.getItem('cv-theme');
+            var q = window.matchMedia('(prefers-color-scheme: dark)');
+            if (s === 'dark' || (!s && q.matches)) {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <style>
+        /* Scrollbar — dark */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        .dark ::-webkit-scrollbar-track {
+            background: #1c1917;
+        }
+
+        .dark ::-webkit-scrollbar-thumb {
+            background: #1e3a5f;
+            border-radius: 3px;
+        }
+
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #2563eb;
+        }
+
+        /* Scrollbar — light */
+        html:not(.dark) ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        html:not(.dark) ::-webkit-scrollbar-thumb {
+            background: #93c5fd;
+            border-radius: 3px;
+        }
+
+        html:not(.dark) ::-webkit-scrollbar-thumb:hover {
+            background: #2563eb;
+        }
+
+        /* Slide panel */
+        .slide-panel {
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide-panel.open {
+            transform: translateX(0);
+        }
+
+        .overlay {
+            transition: opacity 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* ── Light mode overrides ─────────────────────────────────────────────
+           When html does NOT have .dark, flip the surface palette to slate-light
+           so admin UI still looks polished in light mode.
+        ─────────────────────────────────────────────────────────────────────── */
+        html:not(.dark) body,
+        html:not(.dark) .bg-surface-950 {
+            background-color: #f1f5f9 !important;
+        }
+
+        html:not(.dark) .bg-surface-900 {
+            background-color: #ffffff !important;
+        }
+
+        /* opacity variants — header uses bg-surface-900/90, border-surface-800/50 */
+        html:not(.dark) .bg-surface-900\/90 {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+        }
+
+        html:not(.dark) .bg-surface-900\/80 {
+            background-color: rgba(255, 255, 255, 0.85) !important;
+        }
+
+        html:not(.dark) .bg-surface-800 {
+            background-color: #f8fafc !important;
+        }
+
+        html:not(.dark) .bg-surface-700 {
+            background-color: #e2e8f0 !important;
+        }
+
+        html:not(.dark) .bg-black\/70 {
+            background-color: rgba(0, 0, 0, 0.6) !important;
+        }
+
+        /* Hover bgs */
+        html:not(.dark) .hover\:bg-surface-800\/30:hover {
+            background-color: rgba(226, 232, 240, 0.5) !important;
+        }
+
+        html:not(.dark) .hover\:bg-surface-700:hover {
+            background-color: #e2e8f0 !important;
+        }
+
+        html:not(.dark) .hover\:bg-surface-800:hover {
+            background-color: #f1f5f9 !important;
+        }
+
+        /* Opacity variants */
+        html:not(.dark) .bg-surface-800\/50 {
+            background-color: rgba(241, 245, 249, 0.6) !important;
+        }
+
+        html:not(.dark) .bg-brand-500\/10 {
+            background-color: rgba(37, 99, 235, 0.08) !important;
+        }
+
+        html:not(.dark) .bg-red-500\/10 {
+            background-color: rgba(239, 68, 68, 0.08) !important;
+        }
+
+        html:not(.dark) .bg-emerald-500\/10 {
+            background-color: rgba(16, 185, 129, 0.08) !important;
+        }
+
+        /* Borders */
+        html:not(.dark) .border-surface-800,
+        html:not(.dark) .border-surface-800\/50,
+        html:not(.dark) .border-surface-700 {
+            border-color: #e2e8f0 !important;
+        }
+
+        html:not(.dark) .border-dashed.border-surface-700 {
+            border-color: #cbd5e1 !important;
+        }
+
+        /* Text */
+        html:not(.dark) .text-white {
+            color: #0f172a !important;
+        }
+
+        html:not(.dark) .text-surface-200 {
+            color: #334155 !important;
+        }
+
+        html:not(.dark) .text-surface-300 {
+            color: #475569 !important;
+        }
+
+        html:not(.dark) .text-surface-400 {
+            color: #64748b !important;
+        }
+
+        html:not(.dark) .text-surface-500 {
+            color: #94a3b8 !important;
+        }
+
+        html:not(.dark) .text-surface-600 {
+            color: #cbd5e1 !important;
+        }
+
+        /* Input/textarea */
+        html:not(.dark) input:not([type=checkbox]):not([type=radio]),
+        html:not(.dark) textarea,
+        html:not(.dark) select {
+            background-color: #f8fafc !important;
+            border-color: #e2e8f0 !important;
+            color: #1e293b !important;
+        }
+
+        html:not(.dark) input::placeholder,
+        html:not(.dark) textarea::placeholder {
+            color: #94a3b8 !important;
+        }
+
+        /* Slide panel */
+        html:not(.dark) .slide-panel {
+            background: #ffffff !important;
+        }
+
+        .overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Toast */
+        .toast {
+            animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-surface-950 text-surface-100 font-sans antialiased">
+
+    <!-- Top Bar -->
+    <header class="fixed top-0 w-full z-50 bg-surface-900/90 backdrop-blur-xl border-b border-surface-800/50">
+        <div class="flex items-center justify-between px-4 sm:px-6 h-16">
+            <div class="flex items-center gap-3">
+                <a href="/" class="flex items-center gap-2 group">
+                    <img src="/assets/inhouse.png" alt="Inhouse Printing Logo"
+                        class="h-14 w-auto object-contain drop-shadow-sm group-hover:scale-105 transition-transform hidden sm:block" />
+                    <!-- Mobile only logo icon (if you have one) or fallback to smaller image -->
+                    <img src="/assets/inhouse.png" alt="Logo"
+                        class="h-10 w-auto object-contain drop-shadow-sm sm:hidden" />
+                </a>
+                <span class="text-surface-600 hidden sm:block">|</span>
+                <h1 class="font-display font-semibold text-surface-300 text-sm sm:text-base">Admin Dashboard</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="/" class="text-surface-400 hover:text-surface-200 transition-colors text-sm">View Site</a>
+                <!-- Theme toggle -->
+                <button id="dashThemeToggle" title="Toggle light / dark mode"
+                    class="p-1.5 rounded-lg text-surface-500 hover:text-brand-400 transition-colors">
+                    <svg id="dashIconMoon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                    <svg id="dashIconSun" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                </button>
+                <a href="/logout"
+                    class="px-4 py-2 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-colors text-sm font-medium">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Dashboard -->
+    <main class="pt-16 min-h-screen">
+        <div class="p-4 sm:p-6 lg:p-8">
+
+            <!-- Actions Bar -->
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+                <div>
+                    <h2 class="font-display font-bold text-2xl text-white">Products</h2>
+                    <p class="text-surface-500 text-sm" id="productCount">Loading...</p>
+                </div>
+                <div class="flex items-center gap-3 w-full sm:w-auto">
+                    <div class="relative flex-1 sm:w-64">
+                        <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-surface-500" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        <input type="text" id="searchInput" placeholder="Search products..."
+                            class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-surface-800 border border-surface-700 text-surface-200 placeholder-surface-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-sm" />
+                    </div>
+                    <button onclick="openPanel()"
+                        class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-600 to-brand-500 text-white font-medium hover:from-brand-500 hover:to-brand-400 transition-all text-sm whitespace-nowrap shadow-lg shadow-brand-500/20">
+                        + Add Product
+                    </button>
+                </div>
+            </div>
+
+            <!-- Data Table -->
+            <div class="rounded-2xl border border-surface-800 overflow-hidden bg-surface-900">
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b border-surface-800 bg-surface-800/50">
+                                <th
+                                    class="text-left px-4 py-3 text-xs font-semibold text-surface-400 uppercase tracking-wider">
+                                    Image</th>
+                                <th
+                                    class="text-left px-4 py-3 text-xs font-semibold text-surface-400 uppercase tracking-wider">
+                                    Serial No</th>
+                                <th
+                                    class="text-left px-4 py-3 text-xs font-semibold text-surface-400 uppercase tracking-wider">
+                                    Name</th>
+                                <th
+                                    class="text-left px-4 py-3 text-xs font-semibold text-surface-400 uppercase tracking-wider hidden md:table-cell">
+                                    Category</th>
+                                <th
+                                    class="text-left px-4 py-3 text-xs font-semibold text-surface-400 uppercase tracking-wider">
+                                    Price</th>
+                                <th
+                                    class="text-left px-4 py-3 text-xs font-semibold text-surface-400 uppercase tracking-wider hidden lg:table-cell">
+                                    Published</th>
+                                <th
+                                    class="text-right px-4 py-3 text-xs font-semibold text-surface-400 uppercase tracking-wider">
+                                    Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productTableBody">
+                            <tr>
+                                <td colspan="7" class="px-4 py-12 text-center text-surface-500">Loading products...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Overlay -->
+    <div id="overlay" class="overlay fixed inset-0 bg-black/60 z-50" onclick="closePanel()"></div>
+
+    <!-- Slide-out Panel -->
+    <div id="slidePanel"
+        class="slide-panel fixed top-0 right-0 h-full w-full sm:w-[480px] bg-surface-900 border-l border-surface-800 z-50 overflow-y-auto">
+        <div class="p-6">
+            <!-- Panel Header -->
+            <div class="flex items-center justify-between mb-6">
+                <h3 id="panelTitle" class="font-display font-bold text-xl text-white">Add Product</h3>
+                <button onclick="closePanel()" class="p-2 rounded-lg hover:bg-surface-800 transition-colors">
+                    <svg class="w-5 h-5 text-surface-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Product Form -->
+            <form id="productForm" enctype="multipart/form-data" class="space-y-5">
+                <input type="hidden" id="productId" value="" />
+                <input type="hidden" id="existingImages" value="[]" />
+
+                <div>
+                    <label class="block text-sm font-medium text-surface-400 mb-1.5">Name <span
+                            class="text-red-400">*</span></label>
+                    <input type="text" id="formName" required
+                        class="w-full px-4 py-2.5 rounded-xl bg-surface-800 border border-surface-700 text-surface-200 placeholder-surface-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-sm"
+                        placeholder="Product name" />
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-surface-400 mb-1.5">Serial No <span
+                            class="text-red-400">*</span></label>
+                    <input type="text" id="formSerialNo" required
+                        class="w-full px-4 py-2.5 rounded-xl bg-surface-800 border border-surface-700 text-surface-200 placeholder-surface-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-sm font-mono"
+                        placeholder="e.g., KC-001" />
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-surface-400 mb-1.5">Price (₹)</label>
+                        <input type="number" id="formPrice" min="0" step="0.01"
+                            class="w-full px-4 py-2.5 rounded-xl bg-surface-800 border border-surface-700 text-surface-200 placeholder-surface-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-sm"
+                            placeholder="0" />
+                    </div>
+                    <div class="relative" id="categoryWrapper">
+                        <label class="block text-sm font-medium text-surface-400 mb-1.5">Category</label>
+                        <div class="relative">
+                            <input type="text" id="formCategory" autocomplete="off"
+                                class="w-full px-4 py-2.5 rounded-xl bg-surface-800 border border-surface-700 text-surface-200 placeholder-surface-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-sm pr-10"
+                                placeholder="Select or type new..." />
+                            <button type="button" id="categoryDropdownBtn"
+                                class="absolute inset-y-0 right-0 px-3 flex items-center text-surface-500 hover:text-surface-300">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div id="categoryDropdown"
+                            class="absolute z-50 w-full mt-1 bg-surface-800 border border-surface-700 rounded-xl shadow-xl hidden flex flex-col max-h-60 overflow-hidden">
+                            <ul id="categoryList" class="overflow-y-auto py-1 flex-1">
+                                <!-- Categories injected here -->
+                            </ul>
+                            <div class="p-2 border-t border-surface-700 hidden bg-surface-800" id="categoryAddWrapper">
+                                <button type="button" id="categoryAddBtn"
+                                    class="w-full text-left px-2 py-1.5 text-sm text-brand-400 hover:bg-surface-700 rounded-lg transition-colors font-medium">
+                                    + Add "<span id="newCategoryName"></span>"
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-surface-400 mb-1.5">Description</label>
+                    <textarea id="formDescription" rows="3"
+                        class="w-full px-4 py-2.5 rounded-xl bg-surface-800 border border-surface-700 text-surface-200 placeholder-surface-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-sm resize-none"
+                        placeholder="Describe the product..."></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-surface-400 mb-1.5">Specifications</label>
+                    <div id="specsContainer" class="space-y-2"></div>
+                    <button type="button" onclick="addSpecRow('', '')"
+                        class="mt-2 w-full px-4 py-2 rounded-xl border border-dashed border-surface-700 hover:border-brand-500 text-surface-400 hover:text-brand-400 transition-colors text-sm flex items-center justify-center gap-1.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                        Add Specification
+                    </button>
+                </div>
+
+                <!-- Existing images preview -->
+                <div id="existingImagesPreview" class="hidden">
+                    <label class="block text-sm font-medium text-surface-400 mb-1.5">Current Images</label>
+                    <div id="existingImagesGrid" class="grid grid-cols-4 gap-2"></div>
+                </div>
+
+                <div>
+                    <div class="flex items-center justify-between mb-1.5">
+                        <label class="block text-sm font-medium text-surface-400">Upload Images</label>
+                        <span id="imageCounter" class="text-xs text-surface-500">0 / 6 images</span>
+                    </div>
+                    <div class="relative">
+                        <input type="file" id="formImages" multiple accept="image/*" class="hidden"
+                            onchange="handleImagePick(this)" />
+                        <button type="button" onclick="document.getElementById('formImages').click()"
+                            class="w-full px-4 py-6 rounded-xl border-2 border-dashed border-surface-700 hover:border-brand-500 transition-colors text-center">
+                            <svg class="w-8 h-8 mx-auto mb-2 text-surface-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            <span class="text-surface-500 text-sm">Click to add images (max 6 total,
+                                auto-compressed)</span>
+                        </button>
+                    </div>
+                    <div id="newImagesPreview" class="grid grid-cols-4 gap-2 mt-2"></div>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <input type="checkbox" id="formPublished" checked
+                        class="w-4 h-4 rounded bg-surface-800 border-surface-600 text-brand-500 focus:ring-brand-500 focus:ring-offset-0 focus:ring-1" />
+                    <label for="formPublished" class="text-sm text-surface-300">Published (visible on public
+                        site)</label>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <input type="checkbox" id="formFeatured"
+                        class="w-4 h-4 rounded bg-surface-800 border-surface-600 text-amber-500 focus:ring-amber-500 focus:ring-offset-0 focus:ring-1" />
+                    <label for="formFeatured" class="text-sm text-surface-300">⭐ Featured (show on homepage)</label>
+                </div>
+
+                <div class="flex gap-3 pt-2">
+                    <button type="submit" id="submitBtn"
+                        class="flex-1 py-3 rounded-xl bg-gradient-to-r from-brand-600 to-brand-500 text-white font-semibold hover:from-brand-500 hover:to-brand-400 transition-all shadow-lg shadow-brand-500/25 text-sm">
+                        Save Product
+                    </button>
+                    <button type="button" onclick="closePanel()"
+                        class="px-6 py-3 rounded-xl bg-surface-800 text-surface-300 font-medium hover:bg-surface-700 transition-colors text-sm border border-surface-700">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/70">
+        <div class="bg-surface-900 rounded-2xl border border-surface-800 p-6 max-w-sm w-full mx-4">
+            <div class="text-center">
+                <div class="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                </div>
+                <h3 class="font-display font-bold text-lg text-white mb-2">Delete Product</h3>
+                <p class="text-surface-400 text-sm mb-6">Are you sure you want to delete "<span id="deleteProductName"
+                        class="text-white"></span>"? This action cannot be undone.</p>
+                <div class="flex gap-3">
+                    <button onclick="closeDeleteModal()"
+                        class="flex-1 py-2.5 rounded-xl bg-surface-800 text-surface-300 font-medium hover:bg-surface-700 transition-colors text-sm border border-surface-700">Cancel</button>
+                    <button id="confirmDeleteBtn"
+                        class="flex-1 py-2.5 rounded-xl bg-red-600 text-white font-medium hover:bg-red-500 transition-colors text-sm">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="fixed bottom-4 right-4 z-[70] space-y-2"></div>
+
+    <script src="/js/admin.js"></script>
+
+    <script>
+        // ── Dashboard theme toggle ───────────────────────────────
+        var _html = document.documentElement;
+        var _dMoon = document.getElementById('dashIconMoon');
+        var _dSun = document.getElementById('dashIconSun');
+
+        function _dashApplyTheme(dark) {
+            _html.classList.toggle('dark', dark);
+            if (_dMoon) _dMoon.classList.toggle('hidden', dark);
+            if (_dSun) _dSun.classList.toggle('hidden', !dark);
+        }
+
+        // Sync icon state after DOM is ready (anti-flash already ran in <head>)
+        var _saved = localStorage.getItem('cv-theme');
+        var _sys = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        _dashApplyTheme(_saved === 'dark' || (!_saved && _sys));
+
+        var _btn = document.getElementById('dashThemeToggle');
+        if (_btn) {
+            _btn.addEventListener('click', function () {
+                var isDark = !_html.classList.contains('dark');
+                localStorage.setItem('cv-theme', isDark ? 'dark' : 'light');
+                _dashApplyTheme(isDark);
+            });
+        }
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+            if (!localStorage.getItem('cv-theme')) _dashApplyTheme(e.matches);
+        });
+    </script>
+</body>
+
+</html>
