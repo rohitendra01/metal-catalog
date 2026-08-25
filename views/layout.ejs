@@ -4,48 +4,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>
-    Panda Metals — Premium Kitchen Utensils
-  </title>
+  <title>Panda Metals — Premium Kitchen Utensils</title>
   <meta name="description"
     content="Panda Metals — Premium kitchen utensils, cookware, knives, bakeware, and kitchen tools crafted for the modern home chef." />
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
-          colors: {
-            brand: {
-              50: '#eff6ff',
-              100: '#dbeafe',
-              200: '#bfdbfe',
-              300: '#93c5fd',
-              400: '#60a5fa',
-              500: '#3b82f6',
-              600: '#2563eb',
-              700: '#1d4ed8',
-              800: '#1e40af',
-              900: '#1e3a8a',
-              950: '#172554',
-            },
-            surface: {
-              50: '#f8fafc',
-              100: '#f0f6ff',
-              200: '#e2e8f0',
-              300: '#cbd5e1',
-              400: '#94a3b8',
-              500: '#64748b',
-              600: '#475569',
-              700: '#334155',
-              800: '#f0f6ff',
-              900: '#f8fafc',
-              950: '#ffffff',
-            },
-          },
           fontFamily: {
             sans: ['Inter', 'system-ui', 'sans-serif'],
-            display: ['Nunito', 'Outfit', 'system-ui', 'sans-serif'],
+            display: ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
           },
         },
       },
@@ -62,179 +33,198 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Nunito:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 
 <body
-  class="bg-surface-950 dark:bg-stone-950 text-surface-600 dark:text-stone-300 font-sans min-h-screen flex flex-col antialiased transition-colors duration-200">
+  class="bg-white dark:bg-[#0a0a0a] text-zinc-600 dark:text-zinc-400 font-sans min-h-screen flex flex-col antialiased transition-colors duration-200">
 
+  <!-- Structural Navigation -->
   <nav
-    class="fixed top-0 w-full z-50 backdrop-blur-xl bg-white/90 dark:bg-slate-900/90 border-b border-surface-200 dark:border-slate-700/50 shadow-sm dark:shadow-none">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <a href="/" class="flex items-center gap-2.5 group">
-          <!-- Panda Metals logo mark -->
+    class="fixed top-0 w-full z-50 bg-white dark:bg-[#0a0a0a] border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
+    <div class="max-w-[1440px] mx-auto px-6 md:px-12">
+      <div class="flex items-center justify-between h-20">
+
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-3 group">
           <div
-            class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-600 to-brand-500 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
-            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            class="w-10 h-10 bg-zinc-950 dark:bg-white flex items-center justify-center group-hover:bg-orange-600 dark:group-hover:bg-orange-500 transition-colors">
+            <svg class="w-6 h-6 text-white dark:text-zinc-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
             </svg>
           </div>
-          <span
-            class="font-display font-bold text-xl text-slate-800 dark:text-white tracking-tight group-hover:text-brand-600 transition-colors">Panda<span
-              class="text-brand-600">Metals</span></span>
+          <span class="font-display font-black text-2xl text-zinc-950 dark:text-white uppercase tracking-tighter">
+            Panda<span class="text-orange-600">Metals</span>
+          </span>
         </a>
 
-        <div class="hidden md:flex items-center gap-1">
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-8">
           <a href="/" class="nav-link <%= currentPage === 'home' ? 'nav-active' : '' %>">Home</a>
           <a href="/products" class="nav-link <%= currentPage === 'products' ? 'nav-active' : '' %>">Products</a>
           <a href="/about" class="nav-link <%= currentPage === 'about' ? 'nav-active' : '' %>">About</a>
+
           <% if (locals.isAdmin) { %>
-            <a href="/admin" class="nav-link">Dashboard</a>
+            <div class="w-px h-6 bg-zinc-300 dark:bg-zinc-700 mx-2"></div>
+            <a href="/admin" class="nav-link text-orange-600">Dashboard</a>
             <a href="/logout"
-              class="ml-2 px-4 py-2 rounded-lg bg-red-500/10 text-red-600 hover:bg-red-500/20 transition-colors text-sm font-medium">Logout</a>
+              class="px-5 py-2 bg-zinc-100 dark:bg-zinc-900 text-zinc-950 dark:text-white border border-zinc-200 dark:border-zinc-800 text-xs font-bold uppercase tracking-widest hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors">Logout</a>
             <% } %>
         </div>
 
+        <!-- Mobile Toggle -->
         <button id="mobileMenuBtn"
-          class="md:hidden p-2 rounded-lg text-surface-500 dark:text-slate-400 hover:bg-surface-800 dark:hover:bg-slate-800 transition-colors">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          class="md:hidden p-2 text-zinc-950 dark:text-white hover:text-orange-600 transition-colors">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
       </div>
     </div>
 
+    <!-- Mobile Menu Dropdown -->
     <div id="mobileMenu"
-      class="md:hidden hidden absolute top-full left-0 w-full border-b border-surface-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-xl z-50">
-      <div class="px-4 py-3 space-y-1 max-h-[80vh] overflow-y-auto">
+      class="md:hidden hidden absolute top-full left-0 w-full border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#0a0a0a] shadow-2xl z-50">
+      <div class="px-6 py-6 flex flex-col gap-4">
         <a href="/"
-          class="block px-3 py-2 rounded-lg text-surface-500 dark:text-slate-400 hover:text-surface-700 dark:hover:text-slate-200 hover:bg-surface-800 dark:hover:bg-slate-800 transition-colors">Home</a>
+          class="text-xl font-display font-bold text-zinc-950 dark:text-white uppercase tracking-wider hover:text-orange-600 transition-colors">Home</a>
         <a href="/products"
-          class="block px-3 py-2 rounded-lg text-surface-500 dark:text-slate-400 hover:text-surface-700 dark:hover:text-slate-200 hover:bg-surface-800 dark:hover:bg-slate-800 transition-colors">Products</a>
+          class="text-xl font-display font-bold text-zinc-950 dark:text-white uppercase tracking-wider hover:text-orange-600 transition-colors">Products</a>
         <a href="/about"
-          class="block px-3 py-2 rounded-lg text-surface-500 dark:text-slate-400 hover:text-surface-700 dark:hover:text-slate-200 hover:bg-surface-800 dark:hover:bg-slate-800 transition-colors">About</a>
+          class="text-xl font-display font-bold text-zinc-950 dark:text-white uppercase tracking-wider hover:text-orange-600 transition-colors">About</a>
+
         <% if (locals.isAdmin) { %>
-          <a href="/admin"
-            class="block px-3 py-2 rounded-lg text-surface-500 dark:text-slate-400 hover:text-surface-700 dark:hover:text-slate-200 hover:bg-surface-800 dark:hover:bg-slate-800 transition-colors">Dashboard</a>
+          <div class="w-full h-px bg-zinc-200 dark:bg-zinc-800 my-2"></div>
+          <a href="/admin" class="text-xl font-display font-bold text-orange-600 uppercase tracking-wider">Dashboard</a>
           <a href="/logout"
-            class="block px-3 py-2 mt-4 rounded-lg bg-red-500/10 text-red-600 dark:text-red-400 font-medium hover:bg-red-500/20 transition-colors">Logout</a>
+            class="mt-4 px-6 py-4 bg-red-600 text-white text-center text-sm font-bold uppercase tracking-widest">Logout</a>
           <% } %>
       </div>
     </div>
   </nav>
 
   <!-- Main Content -->
-  <main class="flex-1 pt-16">
+  <main class="flex-1 pt-20">
     <%- body %>
   </main>
 
   <!-- Footer -->
-  <footer class="border-t border-surface-200 dark:border-slate-700/40 bg-surface-900 dark:bg-slate-900">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div>
-          <a href="/" class="flex items-center gap-2.5 mb-4 group">
+  <footer class="bg-zinc-50 dark:bg-zinc-950 border-t border-zinc-200 dark:border-zinc-800 pt-20 pb-12">
+    <div class="max-w-[1440px] mx-auto px-6 md:px-12">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-16">
+
+        <div class="md:col-span-5 lg:col-span-4">
+          <a href="/" class="flex items-center gap-3 mb-6 group">
             <div
-              class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-600 to-brand-500 flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
-              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              class="w-8 h-8 bg-zinc-950 dark:bg-white flex items-center justify-center group-hover:bg-orange-600 transition-colors">
+              <svg class="w-5 h-5 text-white dark:text-zinc-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
               </svg>
             </div>
-            <span class="font-display font-bold text-lg text-slate-800 dark:text-white">Panda<span
-                class="text-brand-600">Metals</span></span>
+            <span
+              class="font-display font-black text-xl text-zinc-950 dark:text-white uppercase tracking-tighter">Panda<span
+                class="text-orange-600">Metals</span></span>
           </a>
-          <p class="text-surface-500 dark:text-slate-500 text-sm leading-relaxed">Premium kitchen utensils and cookware
-            crafted for the modern home chef — quality you can feel in every use.</p>
+          <p class="text-zinc-500 font-medium leading-relaxed pr-8">
+            Premium kitchen utensils and cookware crafted for the modern home chef — quality you can feel in every use.
+          </p>
         </div>
-        <div>
-          <h4 class="font-display font-semibold text-surface-700 dark:text-slate-200 mb-4">Quick Links</h4>
-          <ul class="space-y-2 text-sm">
-            <li><a href="/" class="text-surface-400 hover:text-brand-400 transition-colors">Home</a></li>
-            <li><a href="/products" class="text-surface-400 hover:text-brand-400 transition-colors">Products</a></li>
-            <li><a href="/about" class="text-surface-400 hover:text-brand-400 transition-colors">About Us</a></li>
+
+        <div class="md:col-span-3 lg:col-span-4">
+          <h4 class="font-display font-bold text-zinc-950 dark:text-white uppercase tracking-widest mb-6">Index</h4>
+          <ul class="space-y-4 font-medium">
+            <li><a href="/" class="text-zinc-500 hover:text-orange-600 transition-colors">Home</a></li>
+            <li><a href="/products" class="text-zinc-500 hover:text-orange-600 transition-colors">Products</a></li>
+            <li><a href="/about" class="text-zinc-500 hover:text-orange-600 transition-colors">About Us</a></li>
           </ul>
         </div>
-        <div>
-          <h4 class="font-display font-semibold text-surface-700 dark:text-slate-200 mb-4">Contact</h4>
-          <ul class="space-y-3 text-sm text-surface-400">
-            <li class="flex items-start gap-2">
-              <svg class="w-5 h-5 text-brand-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
-                viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
+
+        <div class="md:col-span-4 lg:col-span-4">
+          <h4 class="font-display font-bold text-zinc-950 dark:text-white uppercase tracking-widest mb-6">Contact</h4>
+          <ul class="space-y-4 font-medium text-zinc-500">
+            <li class="flex items-start gap-3">
+              <span class="text-orange-600 mt-1">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </span>
               <span>256, Gopal Bagh Road<br />near BSNL Office, Damoh Naka, PNB colony<br />Jabalpur, Madhya Pradesh
                 482002</span>
             </li>
-            <li class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
-              <a href="tel:+918349017574" class="hover:text-brand-400 transition-colors">+91 834-901-7574</a>
+            <li class="flex items-center gap-3">
+              <span class="text-orange-600">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+              </span>
+              <div class="flex flex-col sm:flex-row gap-1 sm:gap-4">
+                <a href="tel:+919752272888" class="hover:text-orange-600 transition-colors">+91 9752272888</a>
+                <span class="hidden sm:inline text-zinc-300 dark:text-zinc-700">/</span>
+                <a href="tel:+919755790777" class="hover:text-orange-600 transition-colors">+91 9755790777</a>
+              </div>
             </li>
           </ul>
         </div>
       </div>
+
       <div
-        class="border-t border-surface-200 dark:border-slate-700/40 mt-8 pt-8 flex items-center justify-center gap-3 text-surface-400 dark:text-slate-600 text-sm">
-        <span class="text-surface-500 dark:text-slate-500">&copy; <%= new Date().getFullYear() %> Panda Metals. All
-            rights
-            reserved.</span>
-        <!-- Admin settings link -->
-        <a href="<%= locals.isAdmin ? '/admin' : '/login' %>"
-          class="text-surface-300 dark:text-slate-700 hover:text-surface-500 dark:hover:text-slate-400 transition-colors"
-          title="Admin">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
-        </a>
-        <!-- Theme toggle -->
-        <button id="themeToggle" title="Toggle light / dark mode"
-          class="text-surface-300 dark:text-slate-700 hover:text-brand-500 dark:hover:text-brand-400 transition-colors theme-toggle">
-          <!-- Moon: visible in light mode → click to go dark -->
-          <svg id="iconMoon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-          </svg>
-          <!-- Sun: visible in dark mode → click to go light -->
-          <svg id="iconSun" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-          </svg>
-        </button>
+        class="border-t border-zinc-200 dark:border-zinc-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <span class="text-zinc-400 text-xs font-bold uppercase tracking-widest">
+          &copy; <%= new Date().getFullYear() %> Panda Metals. All rights reserved.
+        </span>
+
+        <div class="flex items-center gap-6">
+          <a href="<%= locals.isAdmin ? '/admin' : '/login' %>"
+            class="text-zinc-400 hover:text-zinc-950 dark:hover:text-white transition-colors" title="Admin Access">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </a>
+          <button id="themeToggle" title="Toggle System Theme"
+            class="text-zinc-400 hover:text-orange-600 transition-colors">
+            <svg id="iconMoon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+            <svg id="iconSun" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </footer>
 
   <% if (!locals.isDashboard) { %>
-    <!-- WhatsApp Floating Button -->
+    <!-- WhatsApp Floating Action -->
     <div id="whatsapp-float" class="fixed z-[100] cursor-move select-none touch-none"
       style="top: 50%; right: 1rem; transform: translateY(-50%);">
       <a href="https://api.whatsapp.com/send?phone=<%= String(whatsappNumber).replace(/[^0-9]/g, '') %>&text=<%= encodeURIComponent('Hello! I am inquiring from Panda Metals website.') %>"
         target="_blank" rel="noopener noreferrer" id="whatsapp-link"
-        class="flex items-center justify-center w-14 h-14 bg-[#25D366] rounded-full shadow-[0_8px_30px_rgb(37,211,102,0.4)] hover:scale-110 active:scale-95 transition-all duration-300 group">
-        <svg class="w-8 h-8 text-white drop-shadow-sm" fill="currentColor" viewBox="0 0 448 512">
+        class="flex items-center justify-center w-16 h-16 bg-[#25D366] text-white hover:bg-zinc-950 transition-colors shadow-2xl group border-2 border-transparent hover:border-[#25D366]">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 448 512">
           <path
             d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.7 17.8 69.4 27.2 106.1 27.2 122.4 0 222-99.6 222-222 0-59.3-23-115.1-64.9-157.1zM223.9 446.3c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3 18.7-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.5-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 54 81.2 54 130.4 0.1 101.7-82.7 184.5-184.5 184.5zm100.5-137.5c-5.5-2.8-32.6-16.1-37.7-17.9-5.1-1.8-8.8-2.8-12.5 2.8s-14.3 17.9-17.6 21.6-6.4 4.1-12 1.4c-5.5-2.8-23.4-8.6-44.5-27.4-16.4-14.6-27.5-32.7-30.7-38.2-3.2-5.5-0.3-8.5 2.5-11.2 2.5-2.5 5.5-6.4 8.3-9.6 2.8-3.2 3.7-5.5 5.6-9.2 1.8-3.7 0.9-6.9-0.5-9.6-1.4-2.8-12.5-30.2-17.1-41.4-4.5-11-9.1-9.5-12.5-9.7-3.2-0.1-6.9-0.1-10.6-0.1s-9.7 1.4-14.8 6.9c-5.1 5.5-19.4 19-19.4 46.3s19.9 53.7 22.6 57.3c2.8 3.7 39.1 59.7 94.8 83.8 13.3 5.7 23.6 9.2 31.7 11.7 13.3 4.2 25.5 3.6 35.1 2.2 10.7-1.6 32.6-13.3 37.2-26.2 4.6-12.8 4.6-23.8 3.2-26.2-1.3-2.4-5-3.8-10.5-6.6z" />
         </svg>
         <span
-          class="absolute right-full mr-3 px-2 py-1 rounded bg-slate-800 text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-xl">Contact
-          us</span>
+          class="absolute right-full mr-4 px-3 py-1.5 bg-zinc-950 text-white text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+          Live Chat
+        </span>
       </a>
     </div>
 
+    <!-- Retained exact logic for WhatsApp float drag -->
     <script>
       (function () {
         const floatBtn = document.getElementById('whatsapp-float');
@@ -243,29 +233,23 @@
         let startX, startY, initialX, initialY;
 
         floatBtn.addEventListener('pointerdown', (e) => {
-          // Just record start position, don't capture yet
           startX = e.clientX;
           startY = e.clientY;
-
           const rect = floatBtn.getBoundingClientRect();
           initialX = rect.left;
           initialY = rect.top;
-
           isDragging = false;
         });
 
         window.addEventListener('pointermove', (e) => {
-          if (!startX) return; // Not pressing
-
+          if (!startX) return;
           const dx = e.clientX - startX;
           const dy = e.clientY - startY;
-
           if (!isDragging && (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
             isDragging = true;
             floatBtn.setPointerCapture(e.pointerId);
             floatBtn.style.transition = 'none';
           }
-
           if (isDragging) {
             floatBtn.style.left = (initialX + dx) + 'px';
             floatBtn.style.top = (initialY + dy) + 'px';
@@ -278,11 +262,9 @@
         window.addEventListener('pointerup', (e) => {
           if (!startX) return;
           startX = null;
-
           if (isDragging) {
             floatBtn.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
             const centerX = window.innerWidth / 2;
-
             if (e.clientX < centerX) {
               floatBtn.style.left = '1rem';
               floatBtn.style.right = 'auto';
@@ -291,10 +273,10 @@
               floatBtn.style.right = '1rem';
             }
 
+            // Re-added the top 50% snap-back behavior
             floatBtn.style.top = '50%';
             floatBtn.style.transform = 'translateY(-50%)';
 
-            // Prevent the subsequent click event
             const blockClick = (ev) => {
               ev.preventDefault();
               ev.stopImmediatePropagation();
@@ -308,14 +290,12 @@
     <% } %>
 
       <script>
-        // Mobile menu
         const menuBtn = document.getElementById('mobileMenuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
         if (menuBtn && mobileMenu) {
           menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
         }
 
-        // ── Theme toggle ──────────────────────────────────────────
         const html = document.documentElement;
         const toggle = document.getElementById('themeToggle');
         const iconMoon = document.getElementById('iconMoon');
@@ -331,7 +311,6 @@
         var sys = window.matchMedia('(prefers-color-scheme: dark)').matches;
         applyTheme(saved === 'dark' || (!saved && sys));
 
-        // Button click
         if (toggle) {
           toggle.addEventListener('click', () => {
             var isDark = !html.classList.contains('dark');
@@ -340,12 +319,10 @@
           });
         }
 
-        // Follow system changes only when user hasn't made a manual choice
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
           if (!localStorage.getItem('cv-theme')) applyTheme(e.matches);
         });
       </script>
-
 </body>
 
 </html>

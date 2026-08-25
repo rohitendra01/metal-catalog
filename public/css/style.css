@@ -1,412 +1,187 @@
-/* ============= KitchenCraft Custom Styles ============= */
+/* ============= KitchenCraft Redesign: Structural & Editorial ============= */
+/* Import a harsh, heavy sans-serif for display headers if available, else system fallback handles it via Tailwind */
 
-/* Nav links */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Base utility overrides for editorial feel */
+.font-display {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* Hard geometric fallback */
+}
+
+/* Custom Navigation Link Styling */
 .nav-link {
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.5rem;
+  position: relative;
+  padding: 0.5rem 0;
   font-size: 0.875rem;
-  font-weight: 500;
-  color: #475569;
-  transition: all 0.2s ease;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #52525b;
+  /* zinc-500 */
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: #ea580c;
+  /* orange-600 */
+  transition: width 0.3s ease;
 }
 
 .nav-link:hover {
-  color: #1e293b;
-  background-color: rgba(37, 99, 235, 0.08);
+  color: #09090b;
+  /* zinc-950 */
+}
+
+.nav-link:hover::after,
+.nav-active::after {
+  width: 100%;
 }
 
 .nav-active {
-  color: #1d4ed8 !important;
-  background-color: rgba(37, 99, 235, 0.12) !important;
+  color: #09090b !important;
+  /* zinc-950 */
 }
 
-/* Card hover animation */
-.product-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* Dark Mode Nav Overrides */
+html.dark .nav-link {
+  color: #a1a1aa;
 }
 
-.product-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
+html.dark .nav-link:hover,
+html.dark .nav-active {
+  color: #ffffff !important;
 }
 
-/* Image zoom on hover */
-.img-zoom {
-  transition: transform 0.5s ease;
+/* =========================================
+   Abstract Hero Graphic Art
+   Creates a floating metal/copper composition
+   ========================================= */
+.hero-art-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.6;
+  animation: floatShape 10s ease-in-out infinite;
 }
 
-.img-zoom:hover {
-  transform: scale(1.08);
+.shape-1 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, #ea580c 0%, transparent 70%);
+  top: -10%;
+  right: -10%;
+  animation-delay: 0s;
 }
 
-/* Gradient text — steel blue to sky */
-.gradient-text {
-  background: linear-gradient(135deg, #2563eb, #3b82f6, #60a5fa);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.shape-2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #71717a 0%, transparent 70%);
+  bottom: -20%;
+  right: 20%;
+  animation-delay: -3s;
 }
 
-/* Shimmer skeleton */
-@keyframes shimmer {
+.shape-3 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #f59e0b 0%, transparent 70%);
+  top: 40%;
+  right: -5%;
+  animation-delay: -6s;
+}
+
+@keyframes floatShape {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(-30px, 20px) scale(1.05);
+  }
+}
+
+/* =========================================
+   Component Interactions
+   ========================================= */
+
+/* Button Hover State resets */
+.btn-primary:active,
+.btn-secondary:active {
+  transform: translateY(2px);
+}
+
+/* Custom Scrollbar - Hard blocky style */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f4f4f5;
+  /* zinc-100 */
+  border-left: 1px solid #e4e4e7;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #09090b;
+  /* zinc-950 */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ea580c;
+  /* orange-600 */
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: #09090b;
+  border-left: 1px solid #27272a;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: #fafafa;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #ea580c;
+}
+
+/* Brutalist Loading Skeleton */
+@keyframes structuralShimmer {
   0% {
-    background-position: -200px 0;
+    background-position: -200% 0;
   }
 
   100% {
-    background-position: calc(200px + 100%) 0;
+    background-position: 200% 0;
   }
 }
 
 .skeleton {
-  background: linear-gradient(90deg, #e2e8f0 25%, #cbd5e1 50%, #e2e8f0 75%);
-  background-size: 200px 100%;
-  animation: shimmer 1.5s infinite;
+  background: linear-gradient(90deg, #f4f4f5 25%, #e4e4e7 50%, #f4f4f5 75%);
+  background-size: 200% 100%;
+  animation: structuralShimmer 1.5s infinite;
+  border-radius: 0;
+  /* Remove rounded corners for brutalist feel */
 }
 
-/* Category pills */
-.category-pill {
-  transition: all 0.2s ease;
-}
-
-.category-pill:hover {
-  background-color: rgba(37, 99, 235, 0.1);
-  color: #1d4ed8;
-  border-color: rgba(37, 99, 235, 0.3);
-}
-
-.category-pill.active {
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  color: #ffffff;
-  border-color: transparent;
-}
-
-/* Fade in animation */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.fade-in-up {
-  animation: fadeInUp 0.5s ease forwards;
-}
-
-/* Stagger children */
-.stagger-children>* {
-  opacity: 0;
-  animation: fadeInUp 0.5s ease forwards;
-}
-
-.stagger-children>*:nth-child(1) {
-  animation-delay: 0.05s;
-}
-
-.stagger-children>*:nth-child(2) {
-  animation-delay: 0.1s;
-}
-
-.stagger-children>*:nth-child(3) {
-  animation-delay: 0.15s;
-}
-
-.stagger-children>*:nth-child(4) {
-  animation-delay: 0.2s;
-}
-
-.stagger-children>*:nth-child(5) {
-  animation-delay: 0.25s;
-}
-
-.stagger-children>*:nth-child(6) {
-  animation-delay: 0.3s;
-}
-
-.stagger-children>*:nth-child(7) {
-  animation-delay: 0.35s;
-}
-
-.stagger-children>*:nth-child(8) {
-  animation-delay: 0.4s;
-}
-
-.stagger-children>*:nth-child(9) {
-  animation-delay: 0.45s;
-}
-
-.stagger-children>*:nth-child(10) {
-  animation-delay: 0.5s;
-}
-
-.stagger-children>*:nth-child(11) {
-  animation-delay: 0.55s;
-}
-
-.stagger-children>*:nth-child(12) {
-  animation-delay: 0.6s;
-}
-
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f0f4ff;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #93c5fd;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #2563eb;
-}
-
-/* Hero gradient mesh — cool blue/steel radials on pale blue-white */
-.hero-mesh {
-  background:
-    radial-gradient(ellipse at 20% 50%, rgba(37, 99, 235, 0.10) 0%, transparent 55%),
-    radial-gradient(ellipse at 80% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 85%, rgba(148, 163, 184, 0.08) 0%, transparent 50%),
-    #f0f6ff;
-}
-
-/* Glass effect — cool blue-white translucent */
-.glass {
-  background: rgba(240, 246, 255, 0.80);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(37, 99, 235, 0.15);
-}
-
-/* Pulse glow — steel blue */
-@keyframes pulseGlow {
-
-  0%,
-  100% {
-    box-shadow: 0 0 20px rgba(37, 99, 235, 0.25);
-  }
-
-  50% {
-    box-shadow: 0 0 40px rgba(37, 99, 235, 0.50);
-  }
-}
-
-.pulse-glow {
-  animation: pulseGlow 3s ease-in-out infinite;
-}
-
-/* Theme toggle icon */
-.theme-toggle {
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-
-/* ============================================================
-   DARK MODE OVERRIDES
-   Uses html.dark selector (higher specificity than Tailwind
-   utility classes) to flip the entire public site palette.
-   Dark theme: cool steel / slate — deep navy base.
-   ============================================================ */
-
-html.dark {
-  color-scheme: dark;
-}
-
-/* --- Background colours --- */
-html.dark body,
-html.dark .bg-surface-950 {
-  background-color: #080e1a !important;
-}
-
-html.dark .bg-surface-900 {
-  background-color: #0f172a !important;
-}
-
-html.dark .bg-surface-100,
-html.dark .bg-surface-800 {
-  background-color: #1e293b !important;
-}
-
-html.dark .bg-white {
-  background-color: #162033 !important;
-}
-
-html.dark .bg-brand-50 {
-  background-color: rgba(37, 99, 235, 0.08) !important;
-}
-
-html.dark .bg-brand-100 {
-  background-color: rgba(37, 99, 235, 0.15) !important;
-}
-
-/* Hover states */
-html.dark .hover\:bg-surface-100:hover,
-html.dark .hover\:bg-white:hover {
-  background-color: #263348 !important;
-}
-
-html.dark .hover\:bg-brand-50:hover {
-  background-color: rgba(37, 99, 235, 0.12) !important;
-}
-
-/* --- Border colours --- */
-html.dark .border-surface-200,
-html.dark .border-surface-300 {
-  border-color: #1e3a5f !important;
-}
-
-html.dark .border-brand-200 {
-  border-color: rgba(37, 99, 235, 0.35) !important;
-}
-
-/* --- Text colours --- */
-html.dark .text-surface-700 {
-  color: #e2eaf8 !important;
-}
-
-html.dark .text-surface-600 {
-  color: #cbd5e9 !important;
-}
-
-html.dark .text-surface-500 {
-  color: #94a3b8 !important;
-}
-
-html.dark .text-surface-400 {
-  color: #64748b !important;
-}
-
-html.dark .text-surface-300 {
-  color: #334155 !important;
-}
-
-html.dark .text-brand-600 {
-  color: #60a5fa !important;
-}
-
-/* --- Section wrapper backgrounds --- */
-html.dark section.border-y {
-  border-color: #1e3a5f !important;
-}
-
-/* --- Input elements --- */
-html.dark input,
-html.dark textarea,
-html.dark select {
-  background-color: #1e293b !important;
-  border-color: #2d4a6b !important;
-  color: #cbd5e9 !important;
-}
-
-html.dark input::placeholder,
-html.dark textarea::placeholder {
-  color: #64748b !important;
-}
-
-/* --- Custom component classes --- */
-
-/* Nav link */
-html.dark .nav-link {
-  color: #94a3b8;
-}
-
-html.dark .nav-link:hover {
-  color: #e2eaf8;
-  background-color: rgba(37, 99, 235, 0.10);
-}
-
-html.dark .nav-active {
-  color: #60a5fa !important;
-  background-color: rgba(37, 99, 235, 0.14) !important;
-}
-
-/* Product card */
-html.dark .product-card:hover {
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-}
-
-/* Gradient text */
-html.dark .gradient-text {
-  background: linear-gradient(135deg, #60a5fa, #93c5fd);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Skeleton loader */
 html.dark .skeleton {
-  background: linear-gradient(90deg, #1e293b 25%, #263348 50%, #1e293b 75%);
-  background-size: 200px 100%;
-}
-
-/* Category pill */
-html.dark .category-pill:hover {
-  background-color: rgba(37, 99, 235, 0.12);
-  color: #60a5fa;
-  border-color: rgba(59, 130, 246, 0.35);
-}
-
-html.dark .category-pill.active {
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  color: #ffffff;
-}
-
-/* Hero mesh */
-html.dark .hero-mesh {
-  background:
-    radial-gradient(ellipse at 20% 50%, rgba(37, 99, 235, 0.09) 0%, transparent 55%),
-    radial-gradient(ellipse at 80% 20%, rgba(59, 130, 246, 0.07) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 85%, rgba(148, 163, 184, 0.05) 0%, transparent 50%),
-    #080e1a;
-}
-
-/* Glass card */
-html.dark .glass {
-  background: rgba(15, 23, 42, 0.88);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(37, 99, 235, 0.18);
-}
-
-/* Pulse glow */
-html.dark .pulse-glow {
-  animation: pulseGlowDark 3s ease-in-out infinite;
-}
-
-@keyframes pulseGlowDark {
-
-  0%,
-  100% {
-    box-shadow: 0 0 20px rgba(37, 99, 235, 0.30);
-  }
-
-  50% {
-    box-shadow: 0 0 40px rgba(37, 99, 235, 0.55);
-  }
-}
-
-/* Scrollbar */
-html.dark ::-webkit-scrollbar-track {
-  background: #0f172a;
-}
-
-html.dark ::-webkit-scrollbar-thumb {
-  background: #1e3a5f;
-}
-
-html.dark ::-webkit-scrollbar-thumb:hover {
-  background: #2563eb;
-}
-
-/* Shadow on cards */
-html.dark .shadow-sm {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;
+  background: linear-gradient(90deg, #18181b 25%, #27272a 50%, #18181b 75%);
+  background-size: 200% 100%;
 }

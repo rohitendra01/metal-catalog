@@ -1,19 +1,31 @@
-<section class="min-h-[60vh] flex items-center justify-center py-20">
-    <div class="text-center max-w-md mx-auto px-4">
-        <div class="text-6xl mb-6">😔</div>
-        <h1 class="font-display font-bold text-3xl text-white mb-4">
-            <%= title %>
-        </h1>
-        <p class="text-surface-400 mb-8">
-            <%= message %>
-        </p>
-        <a href="/"
-            class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-brand-600 text-white font-medium hover:bg-brand-500 transition-colors">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-            </svg>
-            Go Home
-        </a>
+<section class="min-h-[80vh] flex items-center justify-center py-20 bg-white dark:bg-[#0a0a0a]">
+    <div class="text-center max-w-lg mx-auto px-6 w-full">
+        <div
+            class="relative bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-12 md:p-16 flex flex-col items-center">
+            <!-- Structural Accent Line -->
+            <div class="absolute top-0 left-0 w-full h-2 bg-orange-600"></div>
+
+            <div class="text-6xl md:text-8xl mb-8 grayscale opacity-50 select-none">⚠️</div>
+
+            <h1
+                class="font-display font-black text-3xl md:text-4xl text-zinc-950 dark:text-white mb-4 uppercase tracking-tighter">
+                <%= title %>
+            </h1>
+
+            <p
+                class="text-zinc-500 dark:text-zinc-400 mb-10 font-medium text-sm md:text-base uppercase tracking-widest">
+                <%= message %>
+            </p>
+
+            <a href="/"
+                class="group flex items-center justify-center gap-3 px-8 py-4 bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 font-bold text-sm uppercase tracking-widest hover:bg-orange-600 dark:hover:bg-orange-500 transition-colors w-full sm:w-auto">
+                <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span>Return to Base</span>
+            </a>
+        </div>
     </div>
 </section>
